@@ -20,7 +20,7 @@ fluidPage(
 	mainPanel(
 		tags$figure(
 			ggvisOutput("plot"),
-			tags$figcaption("\\(t\\)-Verteilung mit einstellbaren Freiheitsgraden, sowie eine gestrichelte Standardnormalverteilung")
+			tags$figcaption("Eine \\(t\\)-Verteilung mit einstellbaren Freiheitsgraden, sowie eine gestrichelte Standardnormalverteilung")
 		)
 	)
 	)
