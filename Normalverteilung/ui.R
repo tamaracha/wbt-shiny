@@ -1,0 +1,27 @@
+library("shiny")
+library("ggvis")
+
+fluidPage(
+	sidebarLayout(
+	sidebarPanel(
+	  numericInput(
+	  "mu",
+	  "Mittelwert",
+	  0,
+	  -10,
+	  10
+	  ),
+	  numericInput(
+	  "sigma",
+	  "Sigma",
+	  1,
+	  0.4,
+	  5,
+	  0.1
+	  )
+	),
+	mainPanel(
+		ggvisOutput("T")
+	)
+	)
+)
