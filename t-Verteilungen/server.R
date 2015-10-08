@@ -1,14 +1,14 @@
 library("shiny")
 library("ggvis")
-Mittelwertunterschiede <- seq(-5.5,5.5,by=0.01)
+Mittelwertunterschiede <- seq(-5.5,5.5,by=0.05)
 Normal <- dnorm(Mittelwertunterschiede)
 DF <- data.frame(Mittelwertunterschiede, Normal)
 shinyServer(function(input, output) {
-T <- reactive(dt(DF$Mittelwertunterschiede,input$DF))
+T <- reactive(dt(Mittelwertunterschiede,input$DF))
 DF %>%
-ggvis(~Mittelwertunterschiede, T) %>%
+ggvis(~Mittelwertunterschiede, T, stroke = "t") %>%
 layer_lines() %>%
-layer_lines(y = ~Normal, strokeDash := c(5,1)) %>%
+layer_lines(y = ~Normal, stroke = "normal") %>%
 scale_numeric("x",domain=c(-5,5)) %>%
 add_axis(
 	"x",

@@ -1,22 +1,39 @@
 library("shiny")
 library("ggvis")
-X <- seq(-10,10,length=501)
+Quantile <- seq(-10.5,10.5,by=0.05)
 
 shinyServer(function(input, output) {
-  df <- reactive({
+  DF <- reactive(
     data.frame(
-      x=X,
-      y=dnorm(X,input$mu,input$sigma)
+      Quantile,
+      Dichte=dnorm(Quantile,input$mu,input$sigma)
     )
-  })
-  df %>%
-  ggvis(~x, ~y) %>%
+  )
+  DF %>%
+  ggvis(~Quantile, ~Dichte) %>%
   layer_lines() %>%
   scale_numeric(
-    property = 'y',
+    'x',
+    domain = c(-10,10)
+  ) %>%
+  scale_numeric(
+    'y',
     domain = c(0,1)
   ) %>%
-  add_axis("x",title = "Quantile", ticks = 20, subdivide = 1) %>%
-  add_axis("y", title = "Dichte") %>%
+  add_axis(
+    "x",
+    subdivide = 3,
+    tick_size_end = 15,
+    tick_size_major = 10,
+    tick_size_minor = 5
+  ) %>%
+  add_axis(
+    "y",
+    title_offset = -20,
+    subdivide = 3,
+    tick_size_end = 15,
+    tick_size_major = 10,
+    tick_size_minor = 5
+  ) %>%
   bind_shiny("T")
 })
