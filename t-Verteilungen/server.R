@@ -29,4 +29,5 @@ add_axis(
 	tick_size_end = 15
 ) %>%
 bind_shiny("plot")
+output$p<-reactive(pt(input$t,input$DF))
 })
